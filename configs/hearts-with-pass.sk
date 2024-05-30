@@ -1,0 +1,21 @@
+every 60 ticks:
+  loop all players:
+    set {_balance.%loop-player%} to loop-player's balance
+    set {_old.%loop-player%} to loop-player's max health
+    set {_health.%loop-player%} to floor({_balance.%loop-player%}/3000) + 10    
+    if {_health.%loop-player%} != {_old.%loop-player%}:
+      if {_health.%loop-player%} >= 15:
+        if loop-player has permission "15+":
+          if {_health.%loop-player%} >= 20:
+            if loop-player has permission "20th":
+              set loop-player's health to 20
+            else:
+              set loop-player's max health to 19
+              send "You do not have the pass to obtain the 20th heart, buy from /shop" to loop-player
+          else:
+            set loop-player's max health to {_health.%loop-player%}
+        else:
+          set loop-player's max health to 15
+          send "You do not have the pass to obtain more than 15 hearts, buy from shop using /shop" to loop-player
+      else:
+        set loop-player's max health to {_health.%loop-player%}
