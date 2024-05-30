@@ -1,5 +1,5 @@
-every 60 ticks:
-    loop all players:
+#please read dependencies file
+
 every 60 ticks:
   loop all players:
     set {_balance.%loop-player%} to loop-player's balance
