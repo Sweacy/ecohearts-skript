@@ -1,1 +1,1 @@
-please ready the dependencies and license file
+please read the dependencies and license file
