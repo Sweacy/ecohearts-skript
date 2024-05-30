@@ -23,12 +23,12 @@ on damage:
       if victim and attacker has permission "incombat":
         stop
       else:
-        execute console command "lp user %victim% setgroup pvp"
-        execute console command "lp user %attacker% setgroup pvp"
-        execute console command "lp user %victim% permission set incombat true"
-        execute console command "lp user %attacker% permission set incombat true"
+        execute console command "lp user %victim's name% setgroup pvp"
+        execute console command "lp user %attacker's name% setgroup pvp"
+        execute console command "lp user %victim's name% permission set incombat true"
+        execute console command "lp user %attacker's name% permission set incombat true"
         wait 600 tick
-        execute console command "lp user %victim% setgroup default"
-        execute console command "lp user %attacker% setgroup default"
-        execute console command "lp user %victim% permission unset incombat"
-        execute console command "lp user %attacker% permission unset incombat"
+        execute console command "lp user %victim's name% setgroup default"
+        execute console command "lp user %attacker's name% setgroup default"
+        execute console command "lp user %victim's name% permission unset incombat"
+        execute console command "lp user %attacker's name% permission unset incombat"
