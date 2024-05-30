@@ -27,7 +27,7 @@ on damage:
         execute console command "lp user %attacker% setgroup pvp"
         execute console command "lp user %victim% permission set incombat true"
         execute console command "lp user %attacker% permission set incombat true"
-        wait 36000 tick
+        wait 600 tick
         execute console command "lp user %victim% setgroup default"
         execute console command "lp user %attacker% setgroup default"
         execute console command "lp user %victim% permission unset incombat"
