@@ -1,34 +1,24 @@
-#please read dependencies file
+on load:
+  set {_heartratio} to 5000 #how much money do u need per heart
+  set {_deathper} to 0.35 #death money deduction percentage
 
-every 60 ticks:
+every 20 ticks:
   loop all players:
     set {_balance.%loop-player%} to loop-player's balance
-    set {_old.%loop-player%} to loop-player's max health
-    set {_health.%loop-player%} to floor({_balance.%loop-player%}/2500) + 10    
-    if {_health.%loop-player%} != {_old.%loop-player%}:
+    send action bar "&6Balance&r: $%{_balance.%loop-player%}%" to loop-player
+    if {_balance.%loop-player%} != {_old.%loop-player%}:
+      set {_health.%loop-player%} to floor({_balance.%loop-player%}/{_heartratio}) + 10    
       if {_health.%loop-player%} > 20:
-        set loop-player's max health to 20
+        set max health of loop-player to 20
       else:
-      set loop-player's max health to {_health.%loop-player%}
-      
+        set max health of loop-player to {_health.%loop-player%}
+
 on death:
   if victim is a player:
     set {_balance.%victim%} to victim's balance
-    set {_deathpen.%victim%} to {_balance.%victim%} * 0.25
-    execute console command "eco take %victim's name% {_deathpen.%victim%}"
-    
-on damage:
-  if victim is a player:
+    set {_deathpen.%victim%} to round({_balance.%victim%} * {_deathper})
+    execute console command "eco take %victim's name% %{_deathpen.%victim%}%"
+    send "You have lost $%{_deathpen.%victim%}%" to victim
     if attacker is a player:
-      if victim and attacker has permission "incombat":
-        stop
-      else:
-        execute console command "lp user %victim's name% setgroup pvp"
-        execute console command "lp user %attacker's name% setgroup pvp"
-        execute console command "lp user %victim's name% permission set incombat true"
-        execute console command "lp user %attacker's name% permission set incombat true"
-        wait 600 tick
-        execute console command "lp user %victim's name% setgroup default"
-        execute console command "lp user %attacker's name% setgroup default"
-        execute console command "lp user %victim's name% permission unset incombat"
-        execute console command "lp user %attacker's name% permission unset incombat"
+      execute console command "eco give %attacker's name% %{_deathpen.%victim%}%"
+      send "You have earned $%{_deathpen.%victim%}% from killing %victim's name%" to attacker
