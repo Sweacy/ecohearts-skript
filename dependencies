@@ -1,2 +1,1 @@
-All code require plugins (bukkit) : Skript, SkBee
-main.sk, combatlog.sk require : LuckPerms (can use other permissions plugin but change the command accordingly)
+skript, skbee
